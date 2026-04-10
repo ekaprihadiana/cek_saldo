@@ -17,7 +17,7 @@
             </div>
 
             <div class="mb-3">
-                <label>userName</label>
+                <label>user Name</label>
                 <input type="text" class="form-control" placeholder="Masukkan username">
             </div>
             <div class="mb-3">
