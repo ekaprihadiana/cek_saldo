@@ -53,7 +53,7 @@ class UserController extends Controller
 }
 
         DB::commit();
-dd('USER MASUK');
+// dd('USER MASUK');
         return redirect()->back()->with('success', 'User berhasil dibuat');
 
     } catch (\Exception $e) {
