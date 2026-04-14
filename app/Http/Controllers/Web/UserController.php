@@ -19,6 +19,7 @@ class UserController extends Controller
 
     public function store(Request $request)
 {
+    dd('MASUK STORE');
     try {
         $request->validate([
             'username' => 'required|unique:users',
