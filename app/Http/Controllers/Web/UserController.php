@@ -19,8 +19,6 @@ class UserController extends Controller
 
     public function store(Request $request)
 {
-    dd('MASUK STORE'); // debug dulu
-
     try {
         $request->validate([
             'username' => 'required|unique:users',
@@ -30,7 +28,6 @@ class UserController extends Controller
 
         DB::beginTransaction();
 
-        // 🔥 1. BUAT USER DULU
         $user = User::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),
@@ -38,7 +35,6 @@ class UserController extends Controller
             'api_token' => Str::random(80),
         ]);
 
-        // 🔥 2. BARU PAKAI $user->id
         DB::table('tabungan')->insert([
             'user_id' => $user->id,
             'saldo' => 0,
