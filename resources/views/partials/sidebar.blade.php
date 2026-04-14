@@ -1,32 +1,34 @@
 @php
-    // Kita gunakan helper request()->is() langsung di class agar lebih fleksibel
+    $segment = request()->segment(1);
 @endphp
 
+
+<!-- Dashboard -->
 <a href="/dashboard"
-   class="sidebar-link {{ request()->is('dashboard*') ? 'active-menu' : '' }}">
-   📊 Dashboard
+   class="sidebar-link {{ $segment == 'dashboard' ? 'active-menu' : '' }}">
+   ðŸ“Š Dashboard
 </a>
 
+<!-- Registrasi User -->
 <a href="/users/register"
    class="sidebar-link {{ request()->is('users/register') ? 'active-menu' : '' }}">
    👤 Register User
 </a>
 
+<!-- Create Tabungan -->
 <a href="/tabungan/create"
-   class="sidebar-link {{ request()->is('tabungan/create') ? 'active-menu' : '' }}">
-   💰 Create Tabungan
+   class="sidebar-link {{ $segment == 'tabungan' && request()->is('tabungan/create') ? 'active-menu' : '' }}">
+   ðŸ’° Create Tabungan
 </a>
 
+<!-- Data Tabungan -->
 <a href="/tabungan"
-   class="sidebar-link {{ request()->is('tabungan') ? 'active-menu' : '' }}">
-   📄 Data Tabungan
+   class="sidebar-link {{ $segment == 'tabungan' && request()->is('tabungan') ? 'active-menu' : '' }}">
+   ðŸ“„ Data Tabungan
 </a>
 
 <hr>
 
-<form action="/logout" method="POST" style="display: inline;">
-    @csrf
-    <button type="submit" class="sidebar-link text-danger border-0 bg-transparent" style="cursor: pointer; width: 100%; text-align: left;">
-        🚪 Logout
-    </button>
-</form>
+<a href="/logout" class="sidebar-link text-danger">
+    ðŸšª Logout
+</a>
