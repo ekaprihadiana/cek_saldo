@@ -19,14 +19,8 @@ class UserController extends Controller
 
     public function store(Request $request)
 {
-    DB::table('tabungan')->insert([
-    'user_id' => $user->id,
-    'saldo' => 0,
-    'created_at' => now()
-]);
+    dd('MASUK STORE'); // debug dulu
 
-dd('TABUNGAN MASUK');
-    dd('MASUK STORE');
     try {
         $request->validate([
             'username' => 'required|unique:users',
@@ -36,6 +30,7 @@ dd('TABUNGAN MASUK');
 
         DB::beginTransaction();
 
+        // 🔥 1. BUAT USER DULU
         $user = User::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),
@@ -43,13 +38,14 @@ dd('TABUNGAN MASUK');
             'api_token' => Str::random(80),
         ]);
 
+        // 🔥 2. BARU PAKAI $user->id
         DB::table('tabungan')->insert([
             'user_id' => $user->id,
             'saldo' => 0,
             'created_at' => now()
         ]);
 
-        DB::commit(); // 🔥 WAJIB
+        DB::commit();
 
         return redirect()->back()->with('success', 'User berhasil dibuat');
 
