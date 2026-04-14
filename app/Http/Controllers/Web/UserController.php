@@ -28,7 +28,6 @@ class UserController extends Controller
 
         DB::beginTransaction();
 
-        // 🔥 Insert user
         $user = User::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),
@@ -36,20 +35,19 @@ class UserController extends Controller
             'api_token' => Str::random(80),
         ]);
 
-        // 🔥 Insert tabungan (samakan dengan API)
         DB::table('tabungan')->insert([
             'user_id' => $user->id,
             'saldo' => 0,
             'created_at' => now()
         ]);
 
-        DB::commit();
+        DB::commit(); // 🔥 WAJIB
 
-        return redirect()->back()->with('success', 'User + tabungan berhasil dibuat');
+        return redirect()->back()->with('success', 'User berhasil dibuat');
 
     } catch (\Exception $e) {
 
-       \Illuminate\Support\Facades\DB::rollBack();
+        DB::rollBack();
 
         return redirect()->back()
             ->with('error', $e->getMessage())

@@ -13,18 +13,16 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'showLogin']);
 Route::post('/login', [AuthController::class, 'login']);
 
-// register (bebas akses)
+// ✅ register (bebas akses)
 Route::get('/users/register', [UserController::class, 'create']);
 Route::post('/users/register', [UserController::class, 'store']);
 
-// logout & dashboard (WAJIB login)
+// ✅ hanya untuk user login
 Route::middleware('auth.login')->group(function () {
 
     Route::get('/dashboard', function () {
         return view('home');
     });
-    Route::get('/users/register', [UserController::class, 'create']);
-Route::post('/users/register', [UserController::class, 'store']);
 
-    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::get('/logout', [AuthController::class, 'logout']); // 🔥 fix juga ini
 });
