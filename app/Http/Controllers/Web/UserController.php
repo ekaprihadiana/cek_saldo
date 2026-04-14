@@ -39,6 +39,18 @@ dd($user);
         //     'saldo' => 0,
         //     'created_at' => now()
         // ]);
+        try {
+    DB::table('tabungan')->insert([
+        'user_id' => $user->id,
+        'saldo' => 0,
+        'created_at' => now()
+    ]);
+
+    dd('TABUNGAN BERHASIL');
+
+} catch (\Exception $e) {
+    dd($e->getMessage()); // 🔥 PASTI KETANGKAP ERROR ASLI
+}
 
         DB::commit();
 dd('USER MASUK');
