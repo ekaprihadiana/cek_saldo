@@ -20,6 +20,5 @@ class AuthLogin
     }
 
     return $next($request);
-        return $next($request);
     }
 }
