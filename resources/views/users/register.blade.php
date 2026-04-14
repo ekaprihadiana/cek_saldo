@@ -27,7 +27,13 @@
     @endif
 
     <div class="card p-4">
-
+@if ($errors->any())
+    <div style="color:red;">
+        @foreach ($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
         <form method="POST" action="/users/register">
 
             @csrf
