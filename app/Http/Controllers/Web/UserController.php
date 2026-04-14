@@ -33,7 +33,7 @@ class UserController extends Controller
             'nama_lengkap' => $request->nama_lengkap,
             'api_token' => Str::random(80),
         ]);
-dd($user);
+// dd($user);
         // DB::table('tabungan')->insert([
         //     'user_id' => $user->id,
         //     'saldo' => 0,
