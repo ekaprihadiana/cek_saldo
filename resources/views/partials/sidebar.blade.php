@@ -10,7 +10,7 @@
         align-items: center;
         padding: 10px 15px;
         text-decoration: none;
-        color: #333;
+        color: #f5f0f0;
         border-radius: 8px;
         transition: 0.3s;
     }
