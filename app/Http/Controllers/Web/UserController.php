@@ -46,7 +46,7 @@ class UserController extends Controller
         'created_at' => now()
     ]);
 
-    dd('TABUNGAN BERHASIL');
+    // dd('TABUNGAN BERHASIL');
 
 } catch (\Exception $e) {
     dd($e->getMessage()); // 🔥 PASTI KETANGKAP ERROR ASLI
