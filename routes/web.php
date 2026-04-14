@@ -1,11 +1,5 @@
 <?php
 
-<<<<<<< HEAD
-use Illuminate\Support\Facades\DB;
-
-Route::get('/', function () {
-    return view('home'); // nanti kita buat view 'home.blade.php'
-=======
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\UserController;
@@ -33,5 +27,4 @@ Route::middleware('auth.login')->group(function () {
 Route::post('/users/register', [UserController::class, 'store']);
 
     Route::get('/logout', [AuthController::class, 'logout']);
->>>>>>> b66c4fcd402bf8fe48b69164ba75aa7c991b9709
 });

@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-<h2>Login</h2>
-
-@if(session('error'))
-    <p style="color:red">{{ session('error') }}</p>
-@endif
-
-<form method="POST" action="/login">
-    @csrf
-
-    <input type="text" name="email" placeholder="Email"><br><br>
-    <input type="password" name="password" placeholder="Password"><br><br>
-
-    <button type="submit">Login</button>
-</form>
-=======
 @extends('layouts.app')
 
 @section('title', 'Tabunganku - Login')
@@ -69,4 +53,3 @@
 </div>
 
 @endsection
->>>>>>> b66c4fcd402bf8fe48b69164ba75aa7c991b9709
