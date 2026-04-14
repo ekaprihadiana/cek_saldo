@@ -1,34 +1,74 @@
-@php
-    $segment = request()->segment(1);
-@endphp
+<style>
+    .sidebar-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .sidebar-link {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #333;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
 
+    .active-menu {
+        background-color: #007bff;
+        color: white !important;
+    }
 
-<!-- Dashboard -->
-<a href="/dashboard"
-   class="sidebar-link {{ $segment == 'dashboard' ? 'active-menu' : '' }}">
-   ðŸ“Š Dashboard
-</a>
+    /* Responsive: Di layar HP (max 768px), menu jadi berjajar horizontal */
+    @media (max-width: 768px) {
+        .sidebar-container {
+            flex-direction: row;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px;
+            background: #f8f9fa;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-top: 1px solid #ddd;
+        }
+        
+        .sidebar-link {
+            flex: 1;
+            justify-content: center;
+            font-size: 12px;
+            flex-direction: column;
+        }
+        
+        hr { display: none; } /* Sembunyikan garis pembatas di mobile */
+    }
+</style>
 
-<!-- Registrasi User -->
-<a href="/users/register"
-   class="sidebar-link {{ request()->is('users/register') ? 'active-menu' : '' }}">
-   👤 Register User
-</a>
+<div class="sidebar-container">
+    @php $segment = request()->segment(1); @endphp
 
-<!-- Create Tabungan -->
-<a href="/tabungan/create"
-   class="sidebar-link {{ $segment == 'tabungan' && request()->is('tabungan/create') ? 'active-menu' : '' }}">
-   ðŸ’° Create Tabungan
-</a>
+    <a href="/dashboard" class="sidebar-link {{ request()->is('dashboard*') ? 'active-menu' : '' }}">
+        <span>📊</span> Dashboard
+    </a>
 
-<!-- Data Tabungan -->
-<a href="/tabungan"
-   class="sidebar-link {{ $segment == 'tabungan' && request()->is('tabungan') ? 'active-menu' : '' }}">
-   ðŸ“„ Data Tabungan
-</a>
+    <a href="/users/register" class="sidebar-link {{ request()->is('users/register') ? 'active-menu' : '' }}">
+        <span>👤</span> Register
+    </a>
 
-<hr>
+    <a href="/tabungan/create" class="sidebar-link {{ request()->is('tabungan/create') ? 'active-menu' : '' }}">
+        <span>💰</span> Create
+    </a>
 
-<a href="/logout" class="sidebar-link text-danger">
-    ðŸšª Logout
-</a>
+    <a href="/tabungan" class="sidebar-link {{ request()->is('tabungan') ? 'active-menu' : '' }}">
+        <span>📄</span> Data
+    </a>
+
+    <hr>
+
+    <a href="/logout" class="sidebar-link text-danger">
+        <span>🚪</span> Logout
+    </a>
+</div>
