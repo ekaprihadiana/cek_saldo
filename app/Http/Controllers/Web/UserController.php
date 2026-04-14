@@ -33,15 +33,15 @@ class UserController extends Controller
             'nama_lengkap' => $request->nama_lengkap,
             'api_token' => Str::random(80),
         ]);
-
-        DB::table('tabungan')->insert([
-            'user_id' => $user->id,
-            'saldo' => 0,
-            'created_at' => now()
-        ]);
+dd($user);
+        // DB::table('tabungan')->insert([
+        //     'user_id' => $user->id,
+        //     'saldo' => 0,
+        //     'created_at' => now()
+        // ]);
 
         DB::commit();
-
+dd('USER MASUK');
         return redirect()->back()->with('success', 'User berhasil dibuat');
 
     } catch (\Exception $e) {
