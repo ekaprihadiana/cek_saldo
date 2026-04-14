@@ -19,6 +19,13 @@ class UserController extends Controller
 
     public function store(Request $request)
 {
+    DB::table('tabungan')->insert([
+    'user_id' => $user->id,
+    'saldo' => 0,
+    'created_at' => now()
+]);
+
+dd('TABUNGAN MASUK');
     dd('MASUK STORE');
     try {
         $request->validate([
