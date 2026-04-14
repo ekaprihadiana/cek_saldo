@@ -1,34 +1,32 @@
 @php
-    $segment = request()->segment(1);
+    // Kita gunakan helper request()->is() langsung di class agar lebih fleksibel
 @endphp
 
-
-<!-- Dashboard -->
 <a href="/dashboard"
-   class="sidebar-link {{ $segment == 'dashboard' ? 'active-menu' : '' }}">
-   ðŸ“Š Dashboard
+   class="sidebar-link {{ request()->is('dashboard*') ? 'active-menu' : '' }}">
+   📊 Dashboard
 </a>
 
-<!-- Registrasi User -->
 <a href="/users/register"
    class="sidebar-link {{ request()->is('users/register') ? 'active-menu' : '' }}">
    👤 Register User
 </a>
 
-<!-- Create Tabungan -->
 <a href="/tabungan/create"
-   class="sidebar-link {{ $segment == 'tabungan' && request()->is('tabungan/create') ? 'active-menu' : '' }}">
-   ðŸ’° Create Tabungan
+   class="sidebar-link {{ request()->is('tabungan/create') ? 'active-menu' : '' }}">
+   💰 Create Tabungan
 </a>
 
-<!-- Data Tabungan -->
 <a href="/tabungan"
-   class="sidebar-link {{ $segment == 'tabungan' && request()->is('tabungan') ? 'active-menu' : '' }}">
-   ðŸ“„ Data Tabungan
+   class="sidebar-link {{ request()->is('tabungan') ? 'active-menu' : '' }}">
+   📄 Data Tabungan
 </a>
 
 <hr>
 
-<a href="/logout" class="sidebar-link text-danger">
-    ðŸšª Logout
-</a>
+<form action="/logout" method="POST" style="display: inline;">
+    @csrf
+    <button type="submit" class="sidebar-link text-danger border-0 bg-transparent" style="cursor: pointer; width: 100%; text-align: left;">
+        🚪 Logout
+    </button>
+</form>
