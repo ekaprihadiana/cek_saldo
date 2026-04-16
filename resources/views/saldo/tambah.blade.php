@@ -147,7 +147,7 @@
             rupiah += separator + ribuan.join('.');
         }
 
-        // tambahkan desimal kalau ada
+        // desimal max 2 digit
         if (desimal !== undefined) {
             rupiah += ',' + desimal.substring(0,2);
         }
@@ -155,7 +155,7 @@
         this.value = rupiah;
     });
 
-    // saat fokus → hapus format (biar enak edit)
+    // saat klik kembali → hapus format biar gampang edit
     input.addEventListener('focus', function() {
         let value = this.value.replace(/\./g, '').replace(',', '.');
         this.value = value;
