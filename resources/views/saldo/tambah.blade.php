@@ -124,14 +124,15 @@
         </div>
     </div>
 </div>
-
 <script>
     const input = document.getElementById('jumlah');
 
-    input.addEventListener('keyup', function(e) {
+    // saat keluar dari input → format rupiah
+    input.addEventListener('blur', function() {
         let value = this.value.replace(/[^0-9,]/g, '');
 
-        // pisahkan angka dan desimal
+        if (!value) return;
+
         let parts = value.split(',');
         let angka = parts[0];
         let desimal = parts[1];
@@ -146,12 +147,18 @@
             rupiah += separator + ribuan.join('.');
         }
 
-        // gabungkan desimal
+        // tambahkan desimal kalau ada
         if (desimal !== undefined) {
             rupiah += ',' + desimal.substring(0,2);
         }
 
         this.value = rupiah;
+    });
+
+    // saat fokus → hapus format (biar enak edit)
+    input.addEventListener('focus', function() {
+        let value = this.value.replace(/\./g, '').replace(',', '.');
+        this.value = value;
     });
 </script>
 
