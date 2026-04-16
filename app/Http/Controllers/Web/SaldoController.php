@@ -8,10 +8,15 @@ use Illuminate\Support\Facades\DB;
 
 class SaldoController extends Controller
 {
-   // tampilkan form
+    // ✅ tampilkan form + data user
     public function formTambahSaldo()
     {
-        return view('saldo.tambah');
+        $users = DB::table('users')
+            ->leftJoin('tabungan', 'users.id', '=', 'tabungan.user_id')
+            ->select('users.username', 'tabungan.saldo')
+            ->get();
+
+        return view('saldo.tambah', compact('users'));
     }
 
     // proses tambah saldo
@@ -34,7 +39,7 @@ class SaldoController extends Controller
 
             DB::beginTransaction();
 
-            // lock tabungan (anti bentrok)
+            // lock tabungan
             $tabungan = DB::table('tabungan')
                 ->where('user_id', $targetUser->id)
                 ->lockForUpdate()
@@ -45,11 +50,14 @@ class SaldoController extends Controller
                 return back()->with('error', 'Data tabungan tidak ditemukan');
             }
 
+            // hitung saldo baru
+            $saldoBaru = ($tabungan->saldo ?? 0) + $request->jumlah;
+
             // update saldo
             DB::table('tabungan')
                 ->where('user_id', $targetUser->id)
                 ->update([
-                    'saldo' => ($tabungan->saldo ?? 0) + $request->jumlah
+                    'saldo' => $saldoBaru
                 ]);
 
             // simpan transaksi
@@ -62,7 +70,10 @@ class SaldoController extends Controller
 
             DB::commit();
 
-            return back()->with('success', 'Saldo berhasil ditambahkan ke ' . $targetUser->username);
+            // 🔥 redirect + kirim saldo terakhir
+            return redirect('/tambah-saldo')
+                ->with('success', 'Saldo berhasil ditambahkan ke ' . $targetUser->username)
+                ->with('last_saldo', $saldoBaru);
 
         } catch (\Exception $e) {
 
