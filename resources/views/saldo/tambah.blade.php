@@ -1,4 +1,6 @@
-@section('title', 'Register User')
+@extends('layouts.app')
+
+@section('title', 'Tambah Saldo')
 
 @section('content')
 
@@ -26,7 +28,7 @@
             {{-- Error validasi --}}
             @if ($errors->any())
                 <div class="alert alert-warning">
-                    <ul>
+                    <ul class="mb-0">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -39,12 +41,12 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label>Username</label>
+                    <label class="form-label">Username</label>
                     <input type="text" name="username" class="form-control" placeholder="Masukkan username">
                 </div>
 
                 <div class="mb-3">
-                    <label>Jumlah Saldo</label>
+                    <label class="form-label">Jumlah Saldo</label>
                     <input type="number" name="jumlah" class="form-control" placeholder="Masukkan jumlah">
                 </div>
 
@@ -57,3 +59,5 @@
         </div>
     </div>
 </div>
+
+@endsection
