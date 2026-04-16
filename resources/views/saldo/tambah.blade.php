@@ -4,21 +4,20 @@
 
 @section('content')
 
-<div class="container-fluid mt-2 px-1 px-md-3">
-    <div class="row justify-content-center">
+<div class="container-fluid mt-2 px-0 px-md-3">
+    <div class="row">
         <div class="col-12 col-md-8 col-lg-6">
 
-            {{-- CARD --}}
-            <div class="card shadow-sm rounded-3 w-100 border-0">
+            <div class="card shadow-sm rounded-0 rounded-md-3 w-100 border-0">
 
                 {{-- HEADER --}}
                 <div class="card-header bg-primary text-white py-3 text-center">
-                    <h5 class="mb-0">💰 Tambah Saldo</h5>
+                    <h5 class="mb-0" style="font-size:20px;">💰 Tambah Saldo</h5>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body px-3 px-md-4">
 
-                    {{-- Alert --}}
+                    {{-- ALERT --}}
                     @if(session('success'))
                         <div class="alert alert-success py-2">
                             {{ session('success') }}
@@ -31,7 +30,7 @@
                         </div>
                     @endif
 
-                    {{-- Saldo terakhir --}}
+                    {{-- SALDO TERAKHIR --}}
                     @if(session('last_saldo'))
                         <div class="alert alert-info text-center py-2">
                             Saldo akhir:<br>
@@ -41,7 +40,7 @@
                         </div>
                     @endif
 
-                    {{-- Error validasi --}}
+                    {{-- ERROR --}}
                     @if ($errors->any())
                         <div class="alert alert-warning py-2">
                             <ul class="mb-0">
@@ -134,16 +133,19 @@
     </div>
 </div>
 
-{{-- FORMAT RUPIAH --}}
+@endsection
+
+
+{{-- SCRIPT WAJIB DI BAWAH --}}
+@section('script')
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
     const input = document.getElementById('jumlah');
     if (!input) return;
 
-    input.addEventListener('blur', function() {
+    function formatRupiah() {
         let value = this.value.replace(/[^0-9,]/g, '');
-
         if (!value) return;
 
         let parts = value.split(',');
@@ -164,14 +166,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         this.value = rupiah;
-    });
+    }
+
+    // 🔥 support HP + desktop
+    input.addEventListener('blur', formatRupiah);
+    input.addEventListener('change', formatRupiah);
 
     input.addEventListener('focus', function() {
-        let value = this.value.replace(/\./g, '').replace(',', '.');
-        this.value = value;
+        this.value = this.value.replace(/\./g, '').replace(',', '.');
     });
 
 });
 </script>
-
 @endsection
