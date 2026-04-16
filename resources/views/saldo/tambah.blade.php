@@ -57,14 +57,14 @@
                         <div class="mb-3">
                             <label class="form-label">Username</label>
                             <select name="username" class="form-control" required>
-                                <option value="">-- Pilih User --</option>
-                                @foreach($users as $u)
-                                    <option value="{{ $u->username }}" 
-                                        {{ old('username') == $u->username ? 'selected' : '' }}>
-                                        {{ $u->username }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <option value="">-- Pilih User --</option>
+                            @foreach($users as $u)
+                                <option value="{{ $u->username }}" 
+                                    {{ old('username') == $u->username ? 'selected' : '' }}>
+                                    {{ $u->name }} ({{ $u->username }})
+                                </option>
+                            @endforeach
+                        </select>
                         </div>
 
                         {{-- Jumlah --}}
@@ -92,6 +92,7 @@
                     <table class="table table-sm table-bordered table-hover">
                         <thead class="table-dark">
                             <tr>
+                                <th>Nama</th>
                                 <th>Username</th>
                                 <th>Saldo</th>
                             </tr>
@@ -99,6 +100,7 @@
                         <tbody>
                             @forelse($users as $u)
                                 <tr>
+                                    <td>{{ $u->name ?? '-' }}</td>
                                     <td>{{ $u->username }}</td>
                                     <td>
                                         <span class="badge bg-success">
