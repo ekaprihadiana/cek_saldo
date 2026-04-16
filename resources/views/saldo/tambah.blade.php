@@ -61,7 +61,7 @@
                             @foreach($users as $u)
                                 <option value="{{ $u->username }}" 
                                     {{ old('username') == $u->username ? 'selected' : '' }}>
-                                    {{ $u->name }} ({{ $u->username }})
+                                    {{ $u->nama_lengkap }} ({{ $u->username }})
                                 </option>
                             @endforeach
                         </select>
