@@ -4,16 +4,15 @@
 
 @section('content')
 
-<div class="container-fluid px-2 px-md-4 py-2">
+<div class="container-fluid px-2 px-md-3 py-2">
 
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-lg-5">
+    <div class="row">
+        <div class="col-12 col-md-10 col-lg-8">
 
-            {{-- CARD (desktop) / FULL (mobile) --}}
             <div class="card shadow-sm border-0 rounded-0 rounded-md-3">
 
                 {{-- HEADER --}}
-                <div class="card-header bg-primary text-white text-center py-3">
+                <div class="card-header bg-primary text-white py-3">
                     <h5 class="mb-0">💰 Tambah Saldo</h5>
                 </div>
 
@@ -21,20 +20,20 @@
 
                     {{-- ALERT --}}
                     @if(session('success'))
-                        <div class="alert alert-success py-2 text-center">
+                        <div class="alert alert-success py-2">
                             {{ session('success') }}
                         </div>
                     @endif
 
                     @if(session('error'))
-                        <div class="alert alert-danger py-2 text-center">
+                        <div class="alert alert-danger py-2">
                             {{ session('error') }}
                         </div>
                     @endif
 
-                    {{-- SALDO TERAKHIR --}}
+                    {{-- SALDO --}}
                     @if(session('last_saldo'))
-                        <div class="bg-light rounded-3 p-3 text-center mb-3">
+                        <div class="bg-light rounded-3 p-3 mb-3">
                             <small class="text-muted">Saldo Akhir</small>
                             <div style="font-size:22px; font-weight:bold;">
                                 Rp {{ number_format(session('last_saldo'), 0, ',', '.') }}
@@ -46,7 +45,6 @@
                     <form method="POST" action="/tambah-saldo">
                         @csrf
 
-                        {{-- USER --}}
                         <div class="mb-3">
                             <label class="form-label fw-bold">User</label>
                             <select name="username" 
@@ -61,19 +59,17 @@
                             </select>
                         </div>
 
-                        {{-- JUMLAH --}}
                         <div class="mb-3">
                             <label class="form-label fw-bold">Jumlah</label>
                             <input type="text" 
                                    name="jumlah" 
                                    id="jumlah"
-                                   class="form-control form-control-lg text-center"
+                                   class="form-control form-control-lg"
                                    style="font-size:22px;"
                                    placeholder="0"
                                    required>
                         </div>
 
-                        {{-- BUTTON --}}
                         <button type="submit" 
                                 class="btn btn-success w-100 py-3"
                                 style="font-size:18px;">
@@ -88,7 +84,7 @@
             {{-- LIST USER --}}
             <div class="mt-3">
 
-                <h6 class="text-center mb-2">Data Saldo User</h6>
+                <h6 class="mb-2">Data Saldo User</h6>
 
                 <div class="bg-white rounded shadow-sm">
 
@@ -110,6 +106,7 @@
 
         </div>
     </div>
+
 </div>
 
 @endsection
