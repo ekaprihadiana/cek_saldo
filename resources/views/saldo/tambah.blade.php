@@ -72,6 +72,7 @@
                             <label class="form-label">Jumlah Saldo</label>
                             <input type="text" 
                                    name="jumlah" 
+                                    id="jumlah"
                                    class="form-control"
                                    value="{{ old('jumlah') }}"
                                    placeholder="Masukkan jumlah"
