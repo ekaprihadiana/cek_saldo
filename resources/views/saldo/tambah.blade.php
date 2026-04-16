@@ -70,7 +70,7 @@
                         {{-- Jumlah --}}
                         <div class="mb-3">
                             <label class="form-label">Jumlah Saldo</label>
-                            <input type="number" 
+                            <input type="text" 
                                    name="jumlah" 
                                    class="form-control"
                                    value="{{ old('jumlah') }}"
@@ -124,6 +124,7 @@
         </div>
     </div>
 </div>
+
 <script>
     const input = document.getElementById('jumlah');
 
@@ -153,4 +154,5 @@
         this.value = rupiah;
     });
 </script>
+
 @endsection
