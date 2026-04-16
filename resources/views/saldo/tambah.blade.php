@@ -42,7 +42,7 @@
                     @endif
 
                     {{-- FORM --}}
-                    <form method="POST" action="/tambah-saldo">
+                    <form method="POST" action="/tambah-saldo" autocomplete="off">
                         @csrf
 
                         <div class="mb-3">

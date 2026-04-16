@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="/users/register">
+            <form method="POST" action="/users/register" autocomplete="off">
                 @csrf
 
                 {{-- USERNAME --}}
