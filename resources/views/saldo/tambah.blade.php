@@ -124,5 +124,33 @@
         </div>
     </div>
 </div>
+<script>
+    const input = document.getElementById('jumlah');
 
+    input.addEventListener('keyup', function(e) {
+        let value = this.value.replace(/[^0-9,]/g, '');
+
+        // pisahkan angka dan desimal
+        let parts = value.split(',');
+        let angka = parts[0];
+        let desimal = parts[1];
+
+        // format ribuan
+        let sisa = angka.length % 3;
+        let rupiah = angka.substr(0, sisa);
+        let ribuan = angka.substr(sisa).match(/\d{3}/g);
+
+        if (ribuan) {
+            let separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        // gabungkan desimal
+        if (desimal !== undefined) {
+            rupiah += ',' + desimal.substring(0,2);
+        }
+
+        this.value = rupiah;
+    });
+</script>
 @endsection
