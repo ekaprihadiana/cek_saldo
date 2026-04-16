@@ -28,6 +28,16 @@
                         </div>
                     @endif
 
+                    {{-- Saldo terakhir --}}
+                    @if(session('last_saldo'))
+                        <div class="alert alert-info">
+                            Saldo akhir: 
+                            <strong>
+                                Rp {{ number_format(session('last_saldo'), 0, ',', '.') }}
+                            </strong>
+                        </div>
+                    @endif
+
                     {{-- Error validasi --}}
                     @if ($errors->any())
                         <div class="alert alert-warning">
@@ -39,17 +49,33 @@
                         </div>
                     @endif
 
+                    {{-- FORM --}}
                     <form method="POST" action="/tambah-saldo">
                         @csrf
 
+                        {{-- Username --}}
                         <div class="mb-3">
                             <label class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control" placeholder="Masukkan username">
+                            <select name="username" class="form-control" required>
+                                <option value="">-- Pilih User --</option>
+                                @foreach($users as $u)
+                                    <option value="{{ $u->username }}" 
+                                        {{ old('username') == $u->username ? 'selected' : '' }}>
+                                        {{ $u->username }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
+                        {{-- Jumlah --}}
                         <div class="mb-3">
                             <label class="form-label">Jumlah Saldo</label>
-                            <input type="number" name="jumlah" class="form-control" placeholder="Masukkan jumlah">
+                            <input type="number" 
+                                   name="jumlah" 
+                                   class="form-control"
+                                   value="{{ old('jumlah') }}"
+                                   placeholder="Masukkan jumlah"
+                                   required>
                         </div>
 
                         <button type="submit" class="btn btn-success">
@@ -57,6 +83,38 @@
                         </button>
 
                     </form>
+
+                    <hr>
+
+                    {{-- TABEL SALDO USER --}}
+                    <h6>Data Saldo User</h6>
+
+                    <table class="table table-sm table-bordered table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Username</th>
+                                <th>Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($users as $u)
+                                <tr>
+                                    <td>{{ $u->username }}</td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            Rp {{ number_format($u->saldo ?? 0, 0, ',', '.') }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="2" class="text-center">
+                                        Tidak ada data user
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
