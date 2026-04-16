@@ -13,9 +13,10 @@
         <span>👤</span> Register
     </a>
 
-    <a href="/tabungan/create" class="sidebar-link {{ request()->is('tabungan/create') ? 'active-menu' : '' }}">
-        <span>💰</span> Create
+   <a href="/tambah-saldo" class="sidebar-link {{ request()->is('tambah-saldo*') ? 'active-menu' : '' }}">
+        <span>➕</span> Tambah Saldo
     </a>
+
 
     <a href="/tabungan" class="sidebar-link {{ request()->is('tabungan') ? 'active-menu' : '' }}">
         <span>📄</span> Data
