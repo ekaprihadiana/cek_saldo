@@ -13,7 +13,7 @@ class SaldoController extends Controller
     {
         $users = DB::table('users')
             ->leftJoin('tabungan', 'users.id', '=', 'tabungan.user_id')
-            ->select('users.username','users.name', 'tabungan.saldo')
+            ->select('users.username','users.nama_lengkap', 'tabungan.saldo')
             ->get();
 
         return view('saldo.tambah', compact('users'));

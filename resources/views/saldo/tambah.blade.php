@@ -100,7 +100,7 @@
                         <tbody>
                             @forelse($users as $u)
                                 <tr>
-                                    <td>{{ $u->name ?? '-' }}</td>
+                                    <td>{{ $u->nama_lengkap ?? '-' }}</td>
                                     <td>{{ $u->username }}</td>
                                     <td>
                                         <span class="badge bg-success">
