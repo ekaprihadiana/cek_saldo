@@ -4,13 +4,16 @@
 
 @section('content')
 
-<div class="container-fluid mt-3 px-2 px-md-3">
-    <div class="row">
-        <div class="col-12 col-md-6">
+<div class="container-fluid mt-2 px-1 px-md-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
 
-            <div class="card shadow-sm rounded-3">
-                <div class="card-header bg-primary text-white py-2">
-                    <h6 class="mb-0">Tambah Saldo</h6>
+            {{-- CARD --}}
+            <div class="card shadow-sm rounded-3 w-100 border-0">
+
+                {{-- HEADER --}}
+                <div class="card-header bg-primary text-white py-3 text-center">
+                    <h5 class="mb-0">💰 Tambah Saldo</h5>
                 </div>
 
                 <div class="card-body">
@@ -30,9 +33,9 @@
 
                     {{-- Saldo terakhir --}}
                     @if(session('last_saldo'))
-                        <div class="alert alert-info py-2">
-                            Saldo akhir: 
-                            <strong>
+                        <div class="alert alert-info text-center py-2">
+                            Saldo akhir:<br>
+                            <strong style="font-size:20px;">
                                 Rp {{ number_format(session('last_saldo'), 0, ',', '.') }}
                             </strong>
                         </div>
@@ -53,32 +56,38 @@
                     <form method="POST" action="/tambah-saldo">
                         @csrf
 
-                        {{-- Username --}}
+                        {{-- USER --}}
                         <div class="mb-3">
-                            <label class="form-label">User</label>
-                            <select name="username" class="form-control form-control-lg" required>
+                            <label class="form-label fw-bold">User</label>
+                            <select name="username" 
+                                    class="form-control"
+                                    style="height:55px; font-size:16px;"
+                                    required>
                                 <option value="">-- Pilih User --</option>
                                 @foreach($users as $u)
-                                    <option value="{{ $u->username }}" 
-                                        {{ old('username') == $u->username ? 'selected' : '' }}>
+                                    <option value="{{ $u->username }}">
                                         {{ $u->nama_lengkap }} ({{ $u->username }})
                                     </option>
                                 @endforeach
                             </select>
                         </div>
 
-                        {{-- Jumlah --}}
+                        {{-- JUMLAH --}}
                         <div class="mb-3">
-                            <label class="form-label">Jumlah Saldo</label>
+                            <label class="form-label fw-bold">Jumlah Saldo</label>
                             <input type="text" 
                                    name="jumlah" 
                                    id="jumlah"
-                                   class="form-control form-control-lg"
+                                   class="form-control"
+                                   style="height:60px; font-size:20px;"
                                    placeholder="Contoh: 20.000"
                                    required>
                         </div>
 
-                        <button type="submit" class="btn btn-success w-100 py-2">
+                        {{-- BUTTON --}}
+                        <button type="submit" 
+                                class="btn btn-success w-100"
+                                style="height:60px; font-size:18px;">
                             💾 Tambah Saldo
                         </button>
 
@@ -87,10 +96,10 @@
                     <hr>
 
                     {{-- TABEL --}}
-                    <h6 class="mt-3 mb-2">Data Saldo User</h6>
+                    <h6 class="mt-3 mb-2 text-center">Data Saldo User</h6>
 
                     <div class="table-responsive">
-                        <table class="table table-sm table-bordered table-hover">
+                        <table class="table table-bordered table-hover text-center">
                             <thead class="table-dark">
                                 <tr>
                                     <th>Nama</th>
@@ -111,9 +120,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3" class="text-center">
-                                            Tidak ada data user
-                                        </td>
+                                        <td colspan="3">Tidak ada data</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -127,7 +134,7 @@
     </div>
 </div>
 
-{{-- SCRIPT FORMAT RUPIAH --}}
+{{-- FORMAT RUPIAH --}}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
